@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# Local database and environment files
+*.db
+.env
+.env.local
+
+# Node (the frontend has its own .gitignore as well)
+node_modules/
+.next/
+
+.DS_Store

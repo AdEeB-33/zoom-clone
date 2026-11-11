@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Design tokens. Everything visual in the app is built from this short list.
+   --------------------------------------------------------------------------- */
+
+@theme inline {
+  /* --font-archivo is set on <html> by next/font in app/layout.tsx. */
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+}
+
+@theme {
+  /* Drop Tailwind's default palette so only these colours can be used. */
+  --color-*: initial;
+
+  --color-white: #ffffff;
+  --color-ink: #0d1b2a; /* text and dark surfaces */
+  --color-slate: #566473; /* secondary text */
+  --color-mist: #f2f5f4; /* page background */
+  --color-line: #d8dee2; /* borders and dividers */
+
+  --color-signal: #ffcb1f; /* the main action */
+  --color-signal-deep: #f0b400;
+  --color-flare: #cf3327; /* live, leave, errors */
+  --color-flare-deep: #ab271d;
+
+  /* The meeting room is the one dark screen. */
+  --color-night: #091420;
+  --color-night-2: #132434;
+  --color-night-3: #20364b;
+  --color-foam: #e8eef2;
+  --color-haze: #9bafc0;
+
+  /* Flag colours (see components/brand/Flag.tsx). */
+  --color-flag-blue: #1b4db1;
+}
+
+/* Archivo is a variable font with a width axis. The three voices below use it:
+   wide for headlines, regular for reading, narrow for times and numbers. */
+
+@utility text-display {
+  font-stretch: 118%;
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+}
+
+@utility text-heading {
+  font-stretch: 110%;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+@utility text-data {
+  font-stretch: 88%;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-mist);
+    color: var(--color-ink);
+  }
+
+  /* One visible keyboard focus style everywhere. */
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+
+  .on-dark :focus-visible {
+    outline-color: var(--color-signal);
+  }
+
+  button:not(:disabled),
+  summary {
+    cursor: pointer;
+  }
+
+  dialog::backdrop {
+    background-color: rgb(13 27 42 / 0.55);
+  }
+
+  /* Stop the page behind an open dialog from scrolling. */
+  html:has(dialog[open]) {
+    overflow: hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
